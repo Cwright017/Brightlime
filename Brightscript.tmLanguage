@@ -8,14 +8,12 @@
 	<array>
 		<string>brs</string>
 	</array>
-	<key>firstLineMatch</key>
-	<string>^#!/usr/bin/env node</string>
 	<key>foldingStartMarker</key>
-	<string>^.*\bfunction\s*(\w+\s*)?\([^\)]*\)(\s*\{[^\}]*)?\s*$</string>
-	<key>foldingStopMarker</key>
-	<string>^\s*\}</string>
-	<key>keyEquivalent</key>
-	<string>^~J</string>
+    <string>(?i)^\s*(sub|if|f(or( each)?|unction)|while)\s*([a-zA-Z_]\w*)\s*(\(.*\)\s*)?$</string>
+    <key>foldingStopMarker</key>
+    <string>(?i)^\s*(next|e(nd(if| (sub|if|function))|xit( while)?))\s*$</string>
+    <key>keyEquivalent</key>
+    <string>^~B</string>
 	<key>name</key>
 	<string>Brightscript2</string>
 	<key>patterns</key>
