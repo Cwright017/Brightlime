@@ -1,0 +1,243 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+comment: 'Brightscript Syntax: version 1.0'
+name: Brightscript2
+scopeName: source.brightscript
+fileTypes: [brs]
+uuid: 93E017CC-6F27-11D9-90EB-000D93589AF6
+
+patterns:
+- comment: "match stuff like: Sound.prototype = { \u2026 } when extending an object"
+  name: meta.class.brightscript
+  match: ([a-zA-Z_?.$][\w?.$]*)\.(prototype)\s*(=)\s*
+  captures:
+    '1': {name: support.class.brightscript}
+    '2': {name: support.constant.brightscript}
+    '3': {name: keyword.operator.brightscript}
+
+- comment: "match stuff like: Sound.prototype.play = function() { \u2026 }"
+  name: meta.function.prototype.brightscript
+  match: ([a-zA-Z_?.$][\w?.$]*)\.(prototype)\.([a-zA-Z_?.$][\w?.$]*)\s*(=)\s*(function)?\s*(\()(.*?)(\))
+  captures:
+    '1': {name: support.class.brightscript}
+    '2': {name: support.constant.brightscript}
+    '3': {name: entity.name.function.brightscript}
+    '4': {name: keyword.operator.brightscript}
+    '5': {name: storage.type.function.brightscript}
+    '6': {name: punctuation.definition.parameters.begin.brightscript}
+    '7': {name: variable.parameter.function.brightscript}
+    '8': {name: punctuation.definition.parameters.end.brightscript}
+
+- comment: 'match stuff like: Sound.prototype.play = myfunc'
+  name: meta.function.brightscript
+  match: ([a-zA-Z_?.$][\w?.$]*)\.(prototype)\.([a-zA-Z_?.$][\w?.$]*)\s*(=)\s*
+  captures:
+    '1': {name: support.class.brightscript}
+    '2': {name: support.constant.brightscript}
+    '3': {name: entity.name.function.brightscript}
+    '4': {name: keyword.operator.brightscript}
+
+- comment: "match stuff like: Sound.play = function() { \u2026 }"
+  name: meta.function.brightscript
+  match: ([a-zA-Z_?.$][\w?.$]*)\.([a-zA-Z_?.$][\w?.$]*)\s*(=)\s*(function)\s*(\()(.*?)(\))
+  captures:
+    '1': {name: support.class.brightscript}
+    '2': {name: entity.name.function.brightscript}
+    '3': {name: keyword.operator.brightscript}
+    '4': {name: storage.type.function.brightscript}
+    '5': {name: punctuation.definition.parameters.begin.brightscript}
+    '6': {name: variable.parameter.function.brightscript}
+    '7': {name: punctuation.definition.parameters.end.brightscript}
+
+- comment: "match stuff like: play = function() { \u2026 }"
+  name: meta.function.brightscript
+  match: ([a-zA-Z_?$][\w?$]*)\s*(=)\s*(function)\s*(\()(.*?)(\))
+  captures:
+    '1': {name: entity.name.function.brightscript}
+    '2': {name: keyword.operator.brightscript}
+    '3': {name: storage.type.function.brightscript}
+    '4': {name: punctuation.definition.parameters.begin.brightscript}
+    '5': {name: variable.parameter.function.brightscript}
+    '6': {name: punctuation.definition.parameters.end.brightscript}
+
+- comment: "match regular function like: function myFunc(arg) { \u2026 }"
+  name: meta.function.brightscript
+  match: \b(function)\s+([a-zA-Z_$]\w*)?\s*(\()(.*?)(\))
+  captures:
+    '1': {name: storage.type.function.brightscript}
+    '2': {name: entity.name.function.brightscript}
+    '3': {name: punctuation.definition.parameters.begin.brightscript}
+    '4': {name: variable.parameter.function.brightscript}
+    '5': {name: punctuation.definition.parameters.end.brightscript}
+
+- comment: "match stuff like: foobar: function() { \u2026 }"
+  name: meta.function.brightscripton.brightscript
+  match: \b([a-zA-Z_?.$][\w?.$]*)\s*:\s*\b(function)?\s*(\()(.*?)(\))
+  captures:
+    '1': {name: entity.name.function.brightscript}
+    '2': {name: storage.type.function.brightscript}
+    '3': {name: punctuation.definition.parameters.begin.brightscript}
+    '4': {name: variable.parameter.function.brightscript}
+    '5': {name: punctuation.definition.parameters.end.brightscript}
+
+- comment: 'Attempt to match "foo": function'
+  name: meta.function.brightscripton.brightscript
+  match: (?:((')([^']*)('))|((")([^"]*)(")))\s*:\s*\b(function)?\s*(\()([^)]*)(\))
+  captures:
+    '1': {name: string.quoted.single.brightscript}
+    '2': {name: punctuation.definition.string.begin.brightscript}
+    '3': {name: entity.name.function.brightscript}
+    '4': {name: punctuation.definition.string.end.brightscript}
+    '5': {name: string.quoted.double.brightscript}
+    '6': {name: punctuation.definition.string.begin.brightscript}
+    '7': {name: entity.name.function.brightscript}
+    '8': {name: punctuation.definition.string.end.brightscript}
+    '9': {name: entity.name.function.brightscript}
+    '10': {name: punctuation.definition.parameters.begin.brightscript}
+    '11': {name: variable.parameter.function.brightscript}
+    '12': {name: punctuation.definition.parameters.end.brightscript}
+
+- name: meta.class.instance.constructor
+  match: (new)\s+(\w+(?:\.\w*)?)
+  captures:
+    '1': {name: keyword.operator.new.brightscript}
+    '2': {name: entity.name.type.instance.brightscript}
+
+- name: entity.name.type.object.brightscript.firebug
+  match: \b(console)\b
+
+- name: support.function.brightscript.firebug
+  match: \.(warn|info|log|error|time|timeEnd|assert)\b
+
+- name: constant.numeric.brightscript
+  match: \b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?))\b
+
+- name: string.quoted.double.brightscript
+  begin: '"'
+  beginCaptures:
+    '0': {name: punctuation.definition.string.begin.brightscript}
+  end: '"'
+  endCaptures:
+    '0': {name: punctuation.definition.string.end.brightscript}
+  patterns:
+  - name: constant.character.escape.brightscript
+    match: \\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)
+
+- name: comment.block.documentation.brightscript
+  begin: /\*\*(?!/)
+  end: \*/
+  captures:
+    '0': {name: punctuation.definition.comment.brightscript}
+
+- name: comment.block.brightscript
+  begin: /\*
+  end: \*/
+  captures:
+    '0': {name: punctuation.definition.comment.brightscript}
+
+- name: comment.line.double-slash.brightscript
+  match: (').*$\n?
+  captures:
+    '1': {name: punctuation.definition.comment.brightscript}
+
+- name: comment.block.html.brightscript
+  match: (<!--|-->)
+  captures:
+    '0': {name: punctuation.definition.comment.html.brightscript}
+    '2': {name: punctuation.definition.comment.html.brightscript}
+- storage_types:
+    name: storage.type.brightscript
+    match: (?i:\b(string|in(te(rface|ger)|valid)|object|double|float|b(oolean|rsub))\b)
+  support_builtin_functions:
+    name: support.function.brightscript
+    match: (?i:\b(GetLastRun(RuntimeError|CompileError)|R(nd|un)|Box|Type)\b)
+  support_component_functions:
+    name: support.function.component.brightscript
+    match: (?i:\b(R(ight|e(set(Index)?|ad(B(yte(IfAvailable)?|lock)|File|Line)?|move(Head|Tail|Index)))|Ge(nXML(Header)?|t(Res(ource|ponse(Headers|Code))|X|M(i(nute|llisecond)|o(nth|de(l)?)|essage)|B(yte(sPerBlock|Array)|o(o(tVersion(Number)?|lean)|dy))|S(t(orageCardInfo|a(ndards|tusByte)|ring(Count)?)|i(zeInMegabytes|gnedByte)|ource(Host|Identity|Port)|ub|ec(tionList|ond)|afe(X|Height|Y|Width))|H(o(stName|ur)|e(ight|ad))|Y(ear)?|N(extArticle|ame(dElements)?)|C(hildElements|ontrols|urrent(Standard|Con(trolValue|fig)|Input))|T(i(tle|me(Server|Zone))|o(String|File)|ext|ail)|I(n(t|dex|puts)|dentity)|ZoneDateTime|D(e(scription|vice(BootCount|Name|U(niqueId|ptime)))|a(y(OfWeek)?|ta))|U(se(dInMegabytes|rData)|tcDateTime)|Ent(ityEncode|ry)|V(ersion(Number)?|alue)|KeyList|F(ileSystemType|loat|a(ilureReason|mily)|reeInMegabytes)|W(holeState|idth)|LocalDateTime|Attributes))|M(id|D5|ap(StereoOutput(Aux)?|DigitalOutput))|Boolean|S(h(ift|ow)|canWiFi|t(op(Clear|Display)?|art|r(i(ng)?)?)|implify|ubtract(Milliseconds|Seconds)|e(nd(RawMessage|B(yte|lock)|Line)?|t(R(ollOverRegion|e(s(ize|olution)|c(tangle|eiveEol)))|X|M(i(n(imumTransferRate|ute)|llisecond)|o(nth|de(CaseSensitive)?)|ultiscreenBezel)|B(yteEventPort|o(olean|dy)|a(ckground(Bitmap|Color)|udRate))|S(t(andard|ring)|ub|e(ndEol|cond)|afeTextRegion)|H(o(stName|ur)|eight)|Y(ear)?|Name|C(hannelVolumes(Aux)?|ontrolValue|ursor(Bitmap|Pos(ition)?))|Time(Server|Zone)?|I(n(t|put)|P4(Gateway|Broadcast|Netmask|Address))|OutputState|D(HCP|omain|e(stination|fault(Mode|Transistion))|a(y(OfWeek)?|te(Time)?))|U(ser(Data|AndPassword)|tcDateTime|rl)|P(o(werSaveMode|rt)|assword|roxy)|E(ntry|cho|ol)|V(iewMode|olume(Aux)?)|F(o(nt|r(egroundColor|groundColor))|l(oat|ashRate))|W(holeState|i(dth|Fi(Passphrase|ESSID)))|L(ineEventPort|o(calDateTime|opMode)|auguage)|Audio(Mode(Aux)?|Stream(Aux)?|Output(Aux)?))|ek(Relative|ToEnd|Absolute)))|H(ide|ead|asAttribute)|N(ormalize|ext)|C(hr|ount|urrentPosition|l(s|ear(Region|Events)?))|T(o(Base64String|HexString|kenize|AsciiString)|estInter(netConnectivity|face)|rim)|I(s(MousePresent|N(ext|ame)|InputActive|Empty|Valid|LittleEndianCPU)|n(str|te(rface|ger)|valid))|Object|D(ynamic|isplay(Preload|File(Ex)?)|o(uble|esExist)|elete)|U(n(shift|pack)|Case)|P(o(st(Message|From(String|File))|p(String(s)?)?)|ush(String)?|eek|lay(StaticImage|File)?|arse(String|File)?|reloadFile(Ex)?)|E(nable(R(ollover|egion)|Cursor|Input|Output)|xists)|Void|F(indIndex|unction|l(oat|ush)|rom(Base64String|HexString|AsciiString))|W(hile|aitMessage|rite(File)?)|L(ookup|e(n|ft))|A(s(ync(GetTo(String|File)|Head|PostFrom(String|File)|Flush)|c)?|tEof|dd(Re(ctangle(Region|_region)|place)|Milliseconds|BodyElement|Seconds|Head(er)?|CircleRegion|Tail|DNSServer|E(vent|lement(WithBody)?)|Attribute)|pp(end(String|File)?|ly)))\b)
+
+- name: keyword.control.brightscript
+  match: (?i:\b(s(t(op|ep)|ub)|i(n|f)|t(hen|o)|dim|print|e(nd(if| (sub|f(or|unction)|while))?|lse(if)?|xit
+    (for|while))|f(or( each)?|unction)|as|while|re(turn|m)|goto)?\b)
+
+- name: keyword.operator.brightscript
+  match: \b(delete|in|instanceof|new|typeof|with)\b
+
+- name: constant.language.boolean.true.brightscript
+  match: \btrue\b
+
+- name: constant.language.boolean.false.brightscript
+  match: \bfalse\b
+
+- name: constant.language.boolean.false.brightscript
+  match: \b(Void|Object|String|Integer|Dynamic|Float)\b
+
+- name: constant.language.null.brightscript
+  match: \bnull\b
+
+- name: variable.language.brightscript
+  match: \b(super|this)\b
+
+- name: keyword.other.brightscript
+  match: \b(debugger)\b
+
+- name: support.class.brightscript
+  match: \b(Anchor|Applet|Area|Array|Boolean|Button|Checkbox|Date|document|event|FileUpload|Form|Frame|Function|Hidden|History|Image|JavaArray|JavaClass|JavaObject|JavaPackage|java|Layer|Link|Location|Math|MimeType|Number|navigator|netscape|Object|Option|Packages|Password|Plugin|Radio|RegExp|Reset|Select|String|Style|Submit|screen|sun|Text|Textarea|window|XMLHttpRequest)\b
+
+- name: support.function.brightscript
+  match: "(?i:\\b(Re(adAsciiFile|bootSystem)|GetInterface|MatchFiles|Sleep|C(opyFile|reate(Directory|Object))|Delete(Directory|File)|UpTime|FormatDrive|ListDir|W(ait|riteAsciiFile))\\\
+    b)\n\t\t\t "
+
+- name: support.constant.dom.brightscript
+  match: (?<=\.)(s(hape|ystemId|c(heme|ope|rolling)|ta(ndby|rt)|ize|ummary|pecified|e(ctionRowIndex|lected(Index)?)|rc)|h(space|t(tpEquiv|mlFor)|e(ight|aders)|ref(lang)?)|n(o(Resize|tation(s|Name)|Shade|Href|de(Name|Type|Value)|Wrap)|extSibling|ame)|c(h(ildNodes|Off|ecked|arset)?|ite|o(ntent|o(kie|rds)|de(Base|Type)?|l(s|Span|or)|mpact)|ell(s|Spacing|Padding)|l(ear|assName)|aption)|t(ype|Bodies|itle|Head|ext|a(rget|gName)|Foot)|i(sMap|ndex|d|m(plementation|ages))|o(ptions|wnerDocument|bject)|d(i(sabled|r)|o(c(type|umentElement)|main)|e(clare|f(er|ault(Selected|Checked|Value)))|at(eTime|a))|useMap|p(ublicId|arentNode|r(o(file|mpt)|eviousSibling))|e(n(ctype|tities)|vent|lements)|v(space|ersion|alue(Type)?|Link|Align)|URL|f(irstChild|orm(s)?|ace|rame(Border)?)|width|l(ink(s)?|o(ngDesc|wSrc)|a(stChild|ng|bel))|a(nchors|c(ce(ssKey|pt(Charset)?)|tion)|ttributes|pplets|l(t|ign)|r(chive|eas)|xis|Link|bbr)|r(ow(s|Span|Index)|ules|e(v|ferrer|l|adOnly))|m(ultiple|e(thod|dia)|a(rgin(Height|Width)|xLength))|b(o(dy|rder)|ackground|gColor))\b
+  storage_types:
+    name: storage.type.brightscript
+    match: (?i:\b(string|in(te(rface|ger)|valid)|object|double|float|b(oolean|rsub))\b)
+  support_builtin_functions:
+    name: support.function.brightscript
+    match: (?i:\b(GetLastRun(RuntimeError|CompileError)|R(nd|un)|Box|Type)\b)
+  support_component_functions:
+    name: support.function.component.brightscript
+    match: (?i:\b(R(ight|e(set(Index)?|ad(B(yte(IfAvailable)?|lock)|File|Line)?|move(Head|Tail|Index)))|Ge(nXML(Header)?|t(Res(ource|ponse(Headers|Code))|X|M(i(nute|llisecond)|o(nth|de(l)?)|essage)|B(yte(sPerBlock|Array)|o(o(tVersion(Number)?|lean)|dy))|S(t(orageCardInfo|a(ndards|tusByte)|ring(Count)?)|i(zeInMegabytes|gnedByte)|ource(Host|Identity|Port)|ub|ec(tionList|ond)|afe(X|Height|Y|Width))|H(o(stName|ur)|e(ight|ad))|Y(ear)?|N(extArticle|ame(dElements)?)|C(hildElements|ontrols|urrent(Standard|Con(trolValue|fig)|Input))|T(i(tle|me(Server|Zone))|o(String|File)|ext|ail)|I(n(t|dex|puts)|dentity)|ZoneDateTime|D(e(scription|vice(BootCount|Name|U(niqueId|ptime)))|a(y(OfWeek)?|ta))|U(se(dInMegabytes|rData)|tcDateTime)|Ent(ityEncode|ry)|V(ersion(Number)?|alue)|KeyList|F(ileSystemType|loat|a(ilureReason|mily)|reeInMegabytes)|W(holeState|idth)|LocalDateTime|Attributes))|M(id|D5|ap(StereoOutput(Aux)?|DigitalOutput))|Boolean|S(h(ift|ow)|canWiFi|t(op(Clear|Display)?|art|r(i(ng)?)?)|implify|ubtract(Milliseconds|Seconds)|e(nd(RawMessage|B(yte|lock)|Line)?|t(R(ollOverRegion|e(s(ize|olution)|c(tangle|eiveEol)))|X|M(i(n(imumTransferRate|ute)|llisecond)|o(nth|de(CaseSensitive)?)|ultiscreenBezel)|B(yteEventPort|o(olean|dy)|a(ckground(Bitmap|Color)|udRate))|S(t(andard|ring)|ub|e(ndEol|cond)|afeTextRegion)|H(o(stName|ur)|eight)|Y(ear)?|Name|C(hannelVolumes(Aux)?|ontrolValue|ursor(Bitmap|Pos(ition)?))|Time(Server|Zone)?|I(n(t|put)|P4(Gateway|Broadcast|Netmask|Address))|OutputState|D(HCP|omain|e(stination|fault(Mode|Transistion))|a(y(OfWeek)?|te(Time)?))|U(ser(Data|AndPassword)|tcDateTime|rl)|P(o(werSaveMode|rt)|assword|roxy)|E(ntry|cho|ol)|V(iewMode|olume(Aux)?)|F(o(nt|r(egroundColor|groundColor))|l(oat|ashRate))|W(holeState|i(dth|Fi(Passphrase|ESSID)))|L(ineEventPort|o(calDateTime|opMode)|auguage)|Audio(Mode(Aux)?|Stream(Aux)?|Output(Aux)?))|ek(Relative|ToEnd|Absolute)))|H(ide|ead|asAttribute)|N(ormalize|ext)|C(hr|ount|urrentPosition|l(s|ear(Region|Events)?))|T(o(Base64String|HexString|kenize|AsciiString)|estInter(netConnectivity|face)|rim)|I(s(MousePresent|N(ext|ame)|InputActive|Empty|Valid|LittleEndianCPU)|n(str|te(rface|ger)|valid))|Object|D(ynamic|isplay(Preload|File(Ex)?)|o(uble|esExist)|elete)|U(n(shift|pack)|Case)|P(o(st(Message|From(String|File))|p(String(s)?)?)|ush(String)?|eek|lay(StaticImage|File)?|arse(String|File)?|reloadFile(Ex)?)|E(nable(R(ollover|egion)|Cursor|Input|Output)|xists)|Void|F(indIndex|unction|l(oat|ush)|rom(Base64String|HexString|AsciiString))|W(hile|aitMessage|rite(File)?)|L(ookup|e(n|ft))|A(s(ync(GetTo(String|File)|Head|PostFrom(String|File)|Flush)|c)?|tEof|dd(Re(ctangle(Region|_region)|place)|Milliseconds|BodyElement|Seconds|Head(er)?|CircleRegion|Tail|DNSServer|E(vent|lement(WithBody)?)|Attribute)|pp(end(String|File)?|ly)))\b)
+
+- name: support.constant.dom.brightscript
+  match: \b(ELEMENT_NODE|ATTRIBUTE_NODE|TEXT_NODE|CDATA_SECTION_NODE|ENTITY_REFERENCE_NODE|ENTITY_NODE|PROCESSING_INSTRUCTION_NODE|COMMENT_NODE|DOCUMENT_NODE|DOCUMENT_TYPE_NODE|DOCUMENT_FRAGMENT_NODE|NOTATION_NODE|INDEX_SIZE_ERR|DOMSTRING_SIZE_ERR|HIERARCHY_REQUEST_ERR|WRONG_DOCUMENT_ERR|INVALID_CHARACTER_ERR|NO_DATA_ALLOWED_ERR|NO_MODIFICATION_ALLOWED_ERR|NOT_FOUND_ERR|NOT_SUPPORTED_ERR|INUSE_ATTRIBUTE_ERR)\b
+
+- name: support.function.event-handler.brightscript
+  match: \bon(R(ow(s(inserted|delete)|e(nter|xit))|e(s(ize(start|end)?|et)|adystatechange))|Mouse(o(ut|ver)|down|up|move)|B(efore(cut|deactivate|u(nload|pdate)|p(aste|rint)|editfocus|activate)|lur)|S(croll|top|ubmit|elect(start|ionchange)?)|H(over|elp)|C(hange|ont(extmenu|rolselect)|ut|ellchange|l(ick|ose))|D(eactivate|ata(setc(hanged|omplete)|available)|r(op|ag(start|over|drop|en(ter|d)|leave)?)|blclick)|Unload|P(aste|ropertychange)|Error(update)?|Key(down|up|press)|Focus|Load|A(ctivate|fter(update|print)|bort))\b
+
+- name: keyword.operator.brightscript
+  match: '!|\$|%|&|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|\*=|(?<!\()/=|%=|\+=|\-=|&=|\^=|\b(in|instanceof|new|delete|typeof|void)\b'
+
+- name: constant.language.brightscript
+  match: \b(Infinity|NaN|undefined)\b
+
+- name: string.regexp.brightscript
+  begin: (?<=[=(:]|^|return|&&|\|\||!)\s*(/)(?![/*+{}?])
+  beginCaptures:
+    '1': {name: punctuation.definition.string.begin.brightscript}
+  end: (/)[igm]*
+  endCaptures:
+    '1': {name: punctuation.definition.string.end.brightscript}
+  patterns:
+  - name: constant.character.escape.brightscript
+    match: \\.
+
+- name: punctuation.terminator.statement.brightscript
+  match: \;
+
+- name: meta.delimiter.object.comma.brightscript
+  match: ',[ |\t]*'
+
+- name: meta.delimiter.method.period.brightscript
+  match: \.
+
+- name: meta.brace.curly.brightscript
+  match: \{|\}
+
+- name: meta.brace.round.brightscript
+  match: \(|\)
+
+- name: meta.brace.square.brightscript
+  match: \[|\]
+foldingStartMarker: (?i)^\s*(sub|if|f(or( each)?|unction)|while)\s*([a-zA-Z_]\w*)\s*(\(.*\)\s*)?$
+foldingStopMarker: (?i)^\s*(next|e(nd(if| (sub|if|function))|xit( while)?))\s*$
+keyEquivalent: ^~B
