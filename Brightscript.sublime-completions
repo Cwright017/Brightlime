@@ -5,7 +5,7 @@
     [
 
     // key words
-     {"trigger": "stop\tkeyword", "contents": "STOP"},
+    {"trigger": "stop\tkeyword", "contents": "STOP"},
     {"trigger": "and\tkeyword", "contents": "and"},
     {"trigger": "as\tkeyword", "contents": "as"},
     {"trigger": "False\tkeyword", "contents": "False"},
@@ -885,7 +885,8 @@
     {"trigger": "GetMessagePort()\tifGetMessagePort - as Object", "contents": "GetMessagePort()"},
     
     // Advanced Snippits
-    { "trigger": "Function\tCreate New Function", "contents": "Function ${1:newFunction}(${2})\n\t${3:}\nEnd Function" },
+    { "trigger": "Function\tCreate New Function", "contents": "Function ${1:newFunction}(${2}) as ${3:void}\n\t${4:}\nEnd Function" },
+    { "trigger": "\tCreate New Function", "contents": "Function ${1:newFunction}(${2}) as ${3:void}\n\t${4:}\nEnd Function" },
     { "trigger": "Sub\tCreate New Sub", "contents": "Sub ${1:newSub}(${2})\n\t${3:}\nEnd Sub" },
     { "trigger": "If\tIf Statement", "contents": "If ${1}\n\t${2}\nEnd If" },
     { "trigger": "While\tWhile Statement", "contents": "While ${1}\n\t${2}\nEnd While" },
