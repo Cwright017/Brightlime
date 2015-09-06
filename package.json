@@ -1,0 +1,19 @@
+{
+  "name": "brightlime",
+  "version": "1.0.0",
+  "description": "",
+  "main": "\"\"",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cwright017/Brightlime.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cwright017/Brightlime/issues"
+  },
+  "homepage": "https://github.com/Cwright017/Brightlime#readme"
+}
