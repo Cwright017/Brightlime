@@ -70,8 +70,9 @@ patterns:
     '5': {name: punctuation.definition.parameters.end.brightscript}
 
 - comment: "match stuff like: foobar: function() { \u2026 }"
-  name: meta.function.brightscripton.brightscript
+  name: meta.function.brightscript
   match: \b([a-zA-Z_?.$][\w?.$]*)\s*:\s*\b(function)?\s*(\()(.*?)(\))
+  # match: (\w+\s*:\s*)(\s*function\s*)[\(](.*)[\)]
   captures:
     '1': {name: entity.name.function.brightscript}
     '2': {name: storage.type.function.brightscript}
@@ -79,22 +80,11 @@ patterns:
     '4': {name: variable.parameter.function.brightscript}
     '5': {name: punctuation.definition.parameters.end.brightscript}
 
-- comment: 'Attempt to match "foo": function'
-  name: meta.function.brightscripton.brightscript
-  match: (?:((')([^']*)('))|((")([^"]*)(")))\s*:\s*\b(function)?\s*(\()([^)]*)(\))
-  captures:
-    '1': {name: string.quoted.single.brightscript}
-    '2': {name: punctuation.definition.string.begin.brightscript}
-    '3': {name: entity.name.function.brightscript}
-    '4': {name: punctuation.definition.string.end.brightscript}
-    '5': {name: string.quoted.double.brightscript}
-    '6': {name: punctuation.definition.string.begin.brightscript}
-    '7': {name: entity.name.function.brightscript}
-    '8': {name: punctuation.definition.string.end.brightscript}
-    '9': {name: entity.name.function.brightscript}
-    '10': {name: punctuation.definition.parameters.begin.brightscript}
-    '11': {name: variable.parameter.function.brightscript}
-    '12': {name: punctuation.definition.parameters.end.brightscript}
+#     '8': {name: punctuation.definition.string.end.brightscript}
+#     '9': {name: entity.name.function.brightscript}
+#     '10': {name: punctuation.definition.parameters.begin.brightscript}
+#     '11': {name: variable.parameter.function.brightscript}
+#     '12': {name: punctuation.definition.parameters.end.brightscript}
 
 - name: meta.class.instance.constructor
   match: (new)\s+(\w+(?:\.\w*)?)
